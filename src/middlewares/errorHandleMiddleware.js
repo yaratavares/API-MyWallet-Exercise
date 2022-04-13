@@ -7,5 +7,6 @@ export default function errorHandlerMiddleware(error, req, res, next) {
 
   if (error.type === "unauthrorized") return res.sendStatus(401);
 
+  console.log(error);
   return res.sendStatus(500);
 }

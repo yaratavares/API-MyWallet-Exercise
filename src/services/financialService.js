@@ -1,22 +1,7 @@
 import * as financialRepository from "../repositories/financialRepository.js";
 import * as errors from "../utils/errorUtils.js";
 
-export async function createNewFinancial({ value, type }, { id }) {
-  if (!value || !type) {
-    throw errors.unprocessableError("informations not valid");
-  }
-
-  const financialTypes = ["INCOME", "OUTCOME"];
-  if (!financialTypes.includes(type)) {
-    throw errors.unprocessableError(
-      "informations type is not INCOME or OUTCOME"
-    );
-  }
-
-  if (value < 0) {
-    throw errors.unprocessableError("value need to be bigger then zero");
-  }
-
+export async function createNewFinancial(value, type, id) {
   await financialRepository.insertNewFinancial(id, value, type);
 }
 

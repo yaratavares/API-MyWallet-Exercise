@@ -1,3 +1,5 @@
+import { verifyToken } from "../services/authService.js";
+
 export async function tokenValidateMiddleware(req, res, next) {
   const authorization = req.headers.authorization || "";
   const token = authorization.replace("Bearer ", "");
@@ -9,7 +11,7 @@ export async function tokenValidateMiddleware(req, res, next) {
   let user;
 
   try {
-    user = jwt.verify(token, process.env.JWT_SECRET);
+    user = verifyToken(token);
   } catch {
     return res.sendStatus(401);
   }
